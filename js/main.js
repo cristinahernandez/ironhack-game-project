@@ -14,7 +14,7 @@ document.onload = (function() {
     player: new Player(),
     ctx: ctx
   });
-  game.start();
+  //game.start();
 
   game.gameOver = function() {
     let gameOver = document.getElementById("gameover");

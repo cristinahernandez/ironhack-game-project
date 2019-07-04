@@ -2,7 +2,7 @@ class Map {
   constructor(level, mapArray) {
     this.level = level;
     this.tileSize = 64;
-    this.design = design;
+    //this.design = design;
     this.mapArray = mapArray;
   }
 

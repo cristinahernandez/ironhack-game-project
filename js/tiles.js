@@ -9,7 +9,7 @@ class Tile {
 }
 
 let road = new Image();
-let builing = new Image();
+let building = new Image();
 
 road.src = "road.png";
 building.src = "building.src";
