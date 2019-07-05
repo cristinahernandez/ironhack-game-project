@@ -1,20 +1,21 @@
-let game;
 document.onload = (function() {
   const canvas = document.getElementById("pickit");
   const ctx = canvas.getContext("2d");
-  const level = 1;
+  const level = "one";
+  const tileSize = 64;
 
   //Define parameters to pass in each game's property, not clear
-  game = new Game({
-    map: new Map(level),
-    tile: new Tile(),
-    dog: new Dog(),
-    poo: new Poo(),
-    neighbor: new Neighbor(),
-    player: new Player(),
-    ctx: ctx
+  let game = new Game({
+    map: new Map(ctx, tileSize),
+    ctx: ctx,
+    // tile: new Tile(),
+    // dog: new Dog(ctx, tileSize)
+    player: new Character(ctx, tileSize)
+    // poo: new Poo(),
+    // neighbor: new Neighbor(),
+    // player: new Player(),
   });
-  //game.start();
+  game.start();
 
   game.gameOver = function() {
     let gameOver = document.getElementById("gameover");

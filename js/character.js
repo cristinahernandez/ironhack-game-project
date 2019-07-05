@@ -1,14 +1,21 @@
 //Define Character class
 
 class Character {
-  constructor(name, design, x, y) {
+  constructor(ctx, tileSize, position, design) {
+    this.ctx = ctx;
+    this.tileSize = tileSize;
     this.name = name;
+    this.position = position;
     this.design = design;
-    this.x = x;
-    this.y = y;
   }
 
-  moveRandom() {
+  drawCharacter() {
+    let position = this.map[x][y];
+
+    for (let row = 0; row < this.map.length; row++) {}
+  }
+
+  /*moveRandom() {
     //Use Math.random() to choose a direction
     let left = 0;
     let up = 1;
@@ -18,8 +25,8 @@ class Character {
   }
 
   checkCollision() {
-    /*if this.position === buildingTile - 1
-    moveRandom except building position*/
+    if this.position === buildingTile - 1
+    moveRandom except building position
   }
 
   _drawCharacter() {
@@ -27,5 +34,5 @@ class Character {
       (Map.ctx.fillRect = this.x), this.y, Map.tileSize, Map.tileSize;
       Map.ctx.fillStyle = this.design;
     }
-  }
+  }*/
 }

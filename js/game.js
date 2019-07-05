@@ -1,25 +1,28 @@
 class Game {
   constructor(options) {
-    this.map = options.map;
-    this.tile = options.tile;
-    this.dog = options.dog;
-    this.poo = options.poo;
-    this.neighbor = options.neighbor;
-    this.player = this.player;
-    this.ctx = options.ctx;
+    const { ctx, map, tileSize, position, design } = options;
+
+    this.ctx = ctx;
+    this.map = map;
+    this.tileSize = tileSize;
+    this.position = position;
+    this.design = design;
+    //this.dog = dog;
+    // this.poo = poo;
+    // this.neighbor = neighbor;
+    // this.player = player;
+
     this.gameOver = undefined;
   }
 
-  ////////DRAW MAP////////
-  _drawMap() {}
-
-  ////////DRAW DOG////////
-
-  ////////DRAW POO'S////////
-
-  ////////ASSIGN CONTROL TO KEYS////////
+  ////////START////////
+  start() {
+    ////////DRAW MAP////////
+    this.map.drawMap();
+    ////////DRAW DOG////////
+    ////////DRAW POO'S////////
+    ////////ASSIGN CONTROL TO KEYS////////
+  }
 
   ////////UPDATE////////
-
-  ////////START////////
 }
