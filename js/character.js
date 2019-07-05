@@ -4,15 +4,32 @@ class Character {
   constructor(ctx, tileSize, position, design) {
     this.ctx = ctx;
     this.tileSize = tileSize;
-    this.name = name;
     this.position = position;
     this.design = design;
+    this.map = [
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      [0, 1, 1, 1, 0, 0, 1, 0, 1, 0],
+      [0, 0, 0, 1, 1, 1, 1, 0, 1, 0],
+      [0, 1, 1, 1, 0, 0, 1, 1, 1, 0],
+      [0, 1, 0, 1, 0, 0, 1, 0, 1, 0],
+      [0, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+      [0, 0, 0, 1, 0, 0, 0, 1, 0, 0],
+      [0, 0, 0, 1, 0, 0, 0, 1, 0, 0],
+      [0, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    ];
   }
 
   drawCharacter() {
-    let position = this.map[x][y];
+    let x = this.position[0];
+    let y = this.position[1];
 
-    for (let row = 0; row < this.map.length; row++) {}
+    console.log(`position in x is: ${x} and position in y is ${y}`);
+    console.log(this.map);
+    console.log(this.map[x][y]);
+    console.log(this.design);
+    this.ctx.fillStyle = this.design;
+    this.ctx.fillRect(this.map[x], this.map[y], this.tileSize, this.tileSize);
   }
 
   /*moveRandom() {
