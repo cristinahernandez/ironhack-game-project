@@ -1,8 +1,8 @@
 //Define Player
 
 class Player extends Character {
-  constructor(ctx, map) {
-    super(ctx, map);
+  constructor(ctx) {
+    super(ctx);
     this.tileFrom = [1, 1];
     this.tileTo = [1, 1];
     this.x = 45;
@@ -38,7 +38,11 @@ class Player extends Character {
 
   moveRight() {
     this.x += 40;
-    this.drawPlayer();
-    console.log(this.x);
+  }
+
+  getPosition() {
+    let posX = Math.floor(this.x / 30);
+    let posY = Math.floor(this.y / 30);
+    // console.log(this.map[posX][posY]);
   }
 }

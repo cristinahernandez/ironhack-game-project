@@ -1,14 +1,14 @@
 //Define Character class
 
 class Character {
-  constructor(ctx, map) {
+  constructor(ctx) {
     this.ctx = ctx;
     //this.tileSize = tileSize;
     //this.position = position;
     //this.design = design;
     //this.tileFrom = tileFrom;
     //this.tileTo = tileTo;
-    this.map = map;
+    this.map;
   }
 
   drawCharacter() {}

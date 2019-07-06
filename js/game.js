@@ -1,24 +1,15 @@
 class Game {
   constructor(options) {
-    const {
-      ctx,
-      map,
-      tileSize,
-      position,
-      design,
-      player,
-      tileFrom,
-      tileTo
-    } = options;
+    const { ctx, map, player, tileSize } = options;
 
     this.ctx = ctx;
     this.map = map;
-    this.tileSize = tileSize;
-    this.position = position;
-    this.design = design;
     this.player = player;
-    this.tileFrom = tileFrom;
-    this.tileTo = tileTo;
+    // this.tileSize = tileSize;
+    // this.position = position;
+    // this.design = design;
+    // this.tileFrom = tileFrom;
+    // this.tileTo = tileTo;
     //this.dog = dog;
     // this.poo = poo;
     // this.neighbor = neighbor;
@@ -46,15 +37,19 @@ class Game {
           console.log("derecha");
           break;
       }
-      this.player.drawPlayer();
-      //this.player.updateCanvas();
     };
   }
 
   update() {
     this.map.drawMap();
     this.player.drawPlayer();
+    this.checkCollision();
     this.intervalGame = window.requestAnimationFrame(this.update.bind(this));
+  }
+
+  checkCollision() {
+    // console.log(this.player.x, this.map);
+    // log del valor del tile del mapa en el que está el jugador
   }
 
   pause() {
