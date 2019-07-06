@@ -1,36 +1,17 @@
 //Define Character class
 
 class Character {
-  constructor(ctx, tileSize, position, design) {
+  constructor(ctx, map) {
     this.ctx = ctx;
-    this.tileSize = tileSize;
-    this.position = position;
-    this.design = design;
-    this.map = [
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-      [0, 1, 1, 1, 0, 0, 1, 0, 1, 0],
-      [0, 0, 0, 1, 1, 1, 1, 0, 1, 0],
-      [0, 1, 1, 1, 0, 0, 1, 1, 1, 0],
-      [0, 1, 0, 1, 0, 0, 1, 0, 1, 0],
-      [0, 1, 1, 1, 1, 1, 1, 1, 1, 0],
-      [0, 0, 0, 1, 0, 0, 0, 1, 0, 0],
-      [0, 0, 0, 1, 0, 0, 0, 1, 0, 0],
-      [0, 1, 1, 1, 1, 1, 1, 1, 1, 0],
-      [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    ];
+    //this.tileSize = tileSize;
+    //this.position = position;
+    //this.design = design;
+    //this.tileFrom = tileFrom;
+    //this.tileTo = tileTo;
+    this.map = map;
   }
 
-  drawCharacter() {
-    let x = this.position[0];
-    let y = this.position[1];
-
-    console.log(`position in x is: ${x} and position in y is ${y}`);
-    console.log(this.map);
-    console.log(this.map[x][y]);
-    console.log(this.design);
-    this.ctx.fillStyle = this.design;
-    this.ctx.fillRect(this.map[x], this.map[y], this.tileSize, this.tileSize);
-  }
+  drawCharacter() {}
 
   /*moveRandom() {
     //Use Math.random() to choose a direction

@@ -3,12 +3,24 @@ document.onload = (function() {
   const ctx = canvas.getContext("2d");
   const level = "one";
   const tileSize = 40;
+  const map1 = [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 1, 1, 1, 0, 0, 1, 0, 1, 0],
+    [0, 0, 0, 1, 1, 1, 1, 0, 1, 0],
+    [0, 1, 1, 1, 0, 0, 1, 1, 1, 0],
+    [0, 1, 0, 1, 0, 0, 1, 0, 1, 0],
+    [0, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+    [0, 0, 0, 1, 0, 0, 0, 1, 0, 0],
+    [0, 0, 0, 1, 0, 0, 0, 1, 0, 0],
+    [0, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  ];
 
   //Define parameters to pass in each game's property, not clear
   let game = new Game({
     ctx: ctx,
-    map: new Map(ctx, tileSize),
-    player: new Character(ctx, tileSize, [0, 1], "white")
+    map: new Map(ctx, tileSize, map1),
+    player: new Player(ctx, map1)
     // tile: new Tile(),
     // dog: new Dog(ctx, tileSize)
     // poo: new Poo(),
