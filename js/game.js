@@ -54,6 +54,7 @@ class Game {
   update() {
     this.map.drawMap();
     this.player.drawPlayer();
+    this.intervalGame = window.requestAnimationFrame(this.update.bind(this));
   }
 
   pause() {

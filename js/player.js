@@ -21,25 +21,23 @@ class Player extends Character {
 
   updateCanvas() {
     ctx.clearRect(0, 0, 400, 400);
-    ctx.fillText("Ghost_x: " + this.x, 580, 40);
-    ctx.fillText("Ghost_y: " + this.y, 580, 60);
     this.drawPlayer;
   }
 
   moveUp() {
-    this.y -= 45;
+    this.y -= 40;
   }
 
   moveDown() {
-    this.y += 45;
+    this.y += 40;
   }
 
   moveLeft() {
-    this.x -= 45;
+    this.x -= 40;
   }
 
   moveRight() {
-    this.x += 45;
+    this.x += 40;
     this.drawPlayer();
     console.log(this.x);
   }
