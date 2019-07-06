@@ -19,23 +19,25 @@ class Game {
 
   assignControlsToKeys() {
     document.onkeydown = e => {
-      switch (e.keyCode) {
-        case 38: // arrow up
-          this.player.moveUp();
-          console.log("arriba");
-          break;
-        case 40: // arrow down
-          this.player.moveDown();
-          console.log("abajo");
-          break;
-        case 37: // arrow left
-          this.player.moveLeft();
-          console.log("izquierda");
-          break;
-        case 39: // arrow right
-          this.player.moveRight();
-          console.log("derecha");
-          break;
+      if (!this.checkCollision()) {
+        switch (e.keyCode) {
+          case 38: // arrow up
+            this.player.moveUp();
+            console.log("arriba");
+            break;
+          case 40: // arrow down
+            this.player.moveDown();
+            console.log("abajo");
+            break;
+          case 37: // arrow left
+            this.player.moveLeft();
+            console.log("izquierda");
+            break;
+          case 39: // arrow right
+            this.player.moveRight();
+            console.log("derecha");
+            break;
+        }
       }
     };
   }

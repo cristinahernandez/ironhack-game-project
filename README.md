@@ -85,4 +85,4 @@ URls for the project repo and deploy
 ### Slides
 
 URls for the project presentation (slides)
-[Link Slides.com](https://slides.com/crishernandez/deck/live?context=editing#/pick-your-sh)
+[Link Slides.com](https://slides.com/crishernandez/pickyour)
