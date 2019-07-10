@@ -20,7 +20,8 @@ document.onload = (function() {
   let game = new Game({
     ctx: ctx,
     map: new Map(ctx, tileSize, map1),
-    player: new Player(ctx)
+    player: new Player(ctx),
+    tileSize: tileSize
     // tile: new Tile(),
     // dog: new Dog(ctx, tileSize)
     // poo: new Poo(),

@@ -41,8 +41,8 @@ class Player extends Character {
   }
 
   getPosition() {
-    let posX = Math.floor(this.x / 30);
-    let posY = Math.floor(this.y / 30);
-    // console.log(this.map[posX][posY]);
+    let newX = Math.floor(this.x / 40);
+    let newY = Math.floor(this.y / 40);
+    return { x: newX, y: newY };
   }
 }
