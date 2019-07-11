@@ -16,12 +16,12 @@ document.onload = (function() {
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   ];
 
-  //Define parameters to pass in each game's property, not clear
   let game = new Game({
     ctx: ctx,
     map: new Map(ctx, tileSize, map1),
-    player: new Player(ctx),
-    tileSize: tileSize
+    player: new Player(ctx, "#fff"),
+    tileSize: tileSize,
+    dog: new Dog(ctx)
     // tile: new Tile(),
     // dog: new Dog(ctx, tileSize)
     // poo: new Poo(),

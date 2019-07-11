@@ -1,25 +1,102 @@
 class Game {
   constructor(options) {
-    const { ctx, map, player, tileSize } = options;
+    const { ctx, map, player, tileSize, dog } = options;
 
     this.ctx = ctx;
     this.map = map;
     this.player = player;
     this.tileSize = tileSize;
+    this.dog = dog;
     // this.position = position;
     // this.design = design;
-    // this.tileFrom = tileFrom;
-    // this.tileTo = tileTo;
-    //this.dog = dog;
     // this.poo = poo;
     // this.neighbor = neighbor;
 
     this.gameOver = undefined;
   }
 
+  moveRandom() {
+    let getRandomNum = Math.floor(Math.random() * Math.floor(4));
+    switch (getRandomNum) {
+      case 0:
+        if (this.checkCollisionRandom("up")) {
+          this.dog.moveUp();
+        }
+        break;
+      case 1:
+        if (this.checkCollisionRandom("down")) {
+          this.dog.moveDown();
+        }
+        break;
+      case 2:
+        if (this.checkCollisionRandom("left")) {
+          this.dog.moveLeft();
+        }
+        break;
+      case 3:
+        if (this.checkCollisionRandom("right")) {
+          this.dog.moveRight();
+        }
+        break;
+    }
+  }
+
+  checkCollisionRandom(direction) {
+    if (direction === "up") {
+      if (
+        this.canImoveNextPosition(
+          this.dog.getPosition().x,
+          this.dog.getPosition().y - 1
+        )
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    if (direction === "down") {
+      if (
+        this.canImoveNextPosition(
+          this.dog.getPosition().x,
+          this.dog.getPosition().y + 1
+        )
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    if (direction === "left") {
+      if (
+        this.canImoveNextPosition(
+          this.dog.getPosition().x - 1,
+          this.dog.getPosition().y
+        )
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    if (direction === "right") {
+      if (
+        this.canImoveNextPosition(
+          this.dog.getPosition().x + 1,
+          this.dog.getPosition().y
+        )
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
+
   assignControlsToKeys() {
     document.onkeydown = e => {
-      // if (!this.checkCollision()) {
       switch (e.keyCode) {
         case 38: // arrow up
           if (this.checkCollision("up")) {
@@ -46,13 +123,14 @@ class Game {
           //console.log("derecha");
           break;
       }
-      // }
     };
   }
 
   update() {
     this.map.drawMap();
+    this.dog.drawDog();
     this.player.drawPlayer();
+    this.moveRandom();
     this.intervalGame = window.requestAnimationFrame(this.update.bind(this));
   }
 

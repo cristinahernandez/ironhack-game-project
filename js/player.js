@@ -1,22 +1,18 @@
 //Define Player
 
 class Player extends Character {
-  constructor(ctx) {
-    super(ctx);
-    this.tileFrom = [1, 1];
-    this.tileTo = [1, 1];
+  constructor(ctx, charSize) {
+    super(ctx, charSize);
     this.x = 45;
     this.y = 45;
-    this.tileSize = 30;
     /*this.timeMoved = 0;
-    
     this.position = [45, 45];
     this.delayMove = 700;*/
   }
 
   drawPlayer() {
     this.ctx.fillStyle = "#fff";
-    this.ctx.fillRect(this.x, this.y, this.tileSize, this.tileSize);
+    this.ctx.fillRect(this.x, this.y, this.charSize, this.charSize);
   }
 
   updateCanvas() {
@@ -40,9 +36,9 @@ class Player extends Character {
     this.x += 40;
   }
 
-  getPosition() {
+  /*getPosition() {
     let newX = Math.floor(this.x / 40);
     let newY = Math.floor(this.y / 40);
     return { x: newX, y: newY };
-  }
+  }*/
 }

@@ -1,8 +1,10 @@
 //Define Character class
 
 class Character {
-  constructor(ctx) {
+  constructor(ctx, color) {
     this.ctx = ctx;
+    this.charSize = 30;
+    this.color = color;
     //this.tileSize = tileSize;
     //this.position = position;
     //this.design = design;
@@ -11,7 +13,11 @@ class Character {
     this.map;
   }
 
-  drawCharacter() {}
+  getPosition() {
+    let newX = Math.floor(this.x / 40);
+    let newY = Math.floor(this.y / 40);
+    return { x: newX, y: newY };
+  }
 
   /*moveRandom() {
     //Use Math.random() to choose a direction
@@ -22,10 +28,6 @@ class Character {
     return Math.floor(Math.random() * Math.floor(4));
   }
 
-  checkCollision() {
-    if this.position === buildingTile - 1
-    moveRandom except building position
-  }
 
   _drawCharacter() {
     if (this.name === dog) {
