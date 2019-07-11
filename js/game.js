@@ -1,12 +1,14 @@
 class Game {
   constructor(options) {
-    const { ctx, map, player, tileSize, dog } = options;
+    const { ctx, map, player, tileSize, dog, poo } = options;
 
     this.ctx = ctx;
     this.map = map;
     this.player = player;
     this.tileSize = tileSize;
     this.dog = dog;
+    this.poo = poo;
+    this.counter = 0;
     // this.position = position;
     // this.design = design;
     // this.poo = poo;
@@ -99,25 +101,37 @@ class Game {
     document.onkeydown = e => {
       switch (e.keyCode) {
         case 38: // arrow up
-          if (this.checkCollision("up")) {
+          if (
+            this.checkCollision("up") &&
+            !this.charCollision("up", this.player, this.dog)
+          ) {
             this.player.moveUp();
           }
           //console.log("arriba");
           break;
         case 40: // arrow down
-          if (this.checkCollision("down")) {
+          if (
+            this.checkCollision("down") &&
+            !this.charCollision("down", this.player, this.dog)
+          ) {
             this.player.moveDown();
           }
           //console.log("abajo");
           break;
         case 37: // arrow left
-          if (this.checkCollision("left")) {
+          if (
+            this.checkCollision("left") &&
+            !this.charCollision("left", this.player, this.dog)
+          ) {
             this.player.moveLeft();
             //console.log("izquierda");
           }
           break;
         case 39: // arrow right
-          if (this.checkCollision("right")) {
+          if (
+            this.checkCollision("right") &&
+            !this.charCollision("right", this.player, this.dog)
+          ) {
             this.player.moveRight();
           }
           //console.log("derecha");
@@ -127,11 +141,71 @@ class Game {
   }
 
   update() {
+    this.counter++;
+    if (this.counter === 20) {
+      this.moveRandom();
+      this.counter = 0;
+    }
     this.map.drawMap();
+    //this.dog.updateSpeed();
     this.dog.drawDog();
     this.player.drawPlayer();
-    this.moveRandom();
+    //this.poo.drawPoo();
+    //this.charCollision(this.player, this.dog);
     this.intervalGame = window.requestAnimationFrame(this.update.bind(this));
+  }
+
+  charCollision(direction, character1, character2) {
+    let posChar1 = character1.getPosition();
+    let posChar2 = character2.getPosition();
+
+    if (direction === "up") {
+      if (
+        (posChar1.x === posChar2.x && posChar1.y === posChar2.y - 1) ||
+        (posChar1.x === posChar2.x && posChar1.y - 1 === posChar2.y)
+      ) {
+        console.log("collision!");
+        return true;
+      } else {
+        console.log("not a collision");
+        return false;
+      }
+    }
+
+    if (direction === "down") {
+      if (
+        (posChar1.x === posChar2.x && posChar1.y === posChar2.y + 1) ||
+        (posChar1.x === posChar2.x && posChar1.y + 1 === posChar2.y)
+      ) {
+        console.log("collision!");
+        return true;
+      } else {
+        console.log("not a collision");
+        return false;
+      }
+    }
+
+    if (direction === "left") {
+      if (
+        (posChar1.x - 1 === posChar2.x && posChar1.y === posChar2.y) ||
+        (posChar1.x === posChar2.x - 1 && posChar1.y === posChar2.y)
+      ) {
+        console.log("collision!");
+      } else {
+        console.log("not a collision");
+      }
+    }
+
+    if (direction === "right") {
+      if (
+        (posChar1.x + 1 === posChar2.x && posChar1.y === posChar2.y) ||
+        (posChar1.x === posChar2.x + 1 && posChar1.y === posChar2.y)
+      ) {
+        console.log("collision!");
+      } else {
+        console.log("not a collision");
+      }
+    }
   }
 
   canImoveNextPosition(column, row) {

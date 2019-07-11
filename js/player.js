@@ -5,9 +5,6 @@ class Player extends Character {
     super(ctx, charSize);
     this.x = 45;
     this.y = 45;
-    /*this.timeMoved = 0;
-    this.position = [45, 45];
-    this.delayMove = 700;*/
   }
 
   drawPlayer() {

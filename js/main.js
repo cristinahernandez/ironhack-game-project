@@ -21,12 +21,10 @@ document.onload = (function() {
     map: new Map(ctx, tileSize, map1),
     player: new Player(ctx, "#fff"),
     tileSize: tileSize,
-    dog: new Dog(ctx)
+    dog: new Dog(ctx),
+    poo: new Poo(ctx)
     // tile: new Tile(),
-    // dog: new Dog(ctx, tileSize)
-    // poo: new Poo(),
     // neighbor: new Neighbor(),
-    // player: new Player(),
   });
   game.start();
 

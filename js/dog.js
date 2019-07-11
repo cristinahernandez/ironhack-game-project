@@ -5,7 +5,13 @@ class Dog extends Character {
     super(ctx);
     this.x = 125;
     this.y = 45;
+    this.dogSpeed = 0;
   }
+
+  /*updateSpeed() {
+    this.y += 1;
+  }*/
+
   //refactorizar drawCharacter
   drawDog() {
     this.ctx.fillStyle = "#89B0AA";
