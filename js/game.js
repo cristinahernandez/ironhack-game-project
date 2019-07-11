@@ -97,44 +97,29 @@ class Game {
     }
   }
 
+  //player controller with keyboard
   assignControlsToKeys() {
     document.onkeydown = e => {
       switch (e.keyCode) {
         case 38: // arrow up
-          if (
-            this.checkCollision("up") &&
-            !this.charCollision("up", this.player, this.dog)
-          ) {
+          if (this.checkCollision("up") && !this.charCollision("up")) {
             this.player.moveUp();
           }
-          //console.log("arriba");
           break;
         case 40: // arrow down
-          if (
-            this.checkCollision("down") &&
-            !this.charCollision("down", this.player, this.dog)
-          ) {
+          if (this.checkCollision("down") && !this.charCollision("down")) {
             this.player.moveDown();
           }
-          //console.log("abajo");
           break;
         case 37: // arrow left
-          if (
-            this.checkCollision("left") &&
-            !this.charCollision("left", this.player, this.dog)
-          ) {
+          if (this.checkCollision("left") && !this.charCollision("left")) {
             this.player.moveLeft();
-            //console.log("izquierda");
           }
           break;
         case 39: // arrow right
-          if (
-            this.checkCollision("right") &&
-            !this.charCollision("right", this.player, this.dog)
-          ) {
+          if (this.checkCollision("right") && !this.charCollision("right")) {
             this.player.moveRight();
           }
-          //console.log("derecha");
           break;
       }
     };
@@ -151,61 +136,97 @@ class Game {
     this.dog.drawDog();
     this.player.drawPlayer();
     //this.poo.drawPoo();
-    //this.charCollision(this.player, this.dog);
+    //this.charCollision();
     this.intervalGame = window.requestAnimationFrame(this.update.bind(this));
   }
 
-  charCollision(direction, character1, character2) {
-    let posChar1 = character1.getPosition();
-    let posChar2 = character2.getPosition();
-
+  //check collisions between characters
+  charCollision(direction) {
+    let posPlayer = this.player.getPosition();
+    let posDog = this.dog.getPosition();
     if (direction === "up") {
-      if (
-        (posChar1.x === posChar2.x && posChar1.y === posChar2.y - 1) ||
-        (posChar1.x === posChar2.x && posChar1.y - 1 === posChar2.y)
-      ) {
-        console.log("collision!");
+      if (posPlayer.x === posDog.x && posPlayer.y - 1 === posDog.y) {
+        console.log("don't move up!collision!");
         return true;
       } else {
-        console.log("not a collision");
-        return false;
+        return;
       }
     }
 
     if (direction === "down") {
-      if (
-        (posChar1.x === posChar2.x && posChar1.y === posChar2.y + 1) ||
-        (posChar1.x === posChar2.x && posChar1.y + 1 === posChar2.y)
-      ) {
-        console.log("collision!");
+      if (posPlayer.x === posDog.x && posPlayer.y + 1 === posDog.y) {
+        console.log("don't move down!collision!");
         return true;
       } else {
-        console.log("not a collision");
-        return false;
+        return;
       }
     }
 
     if (direction === "left") {
-      if (
-        (posChar1.x - 1 === posChar2.x && posChar1.y === posChar2.y) ||
-        (posChar1.x === posChar2.x - 1 && posChar1.y === posChar2.y)
-      ) {
-        console.log("collision!");
+      if (posPlayer.x - 1 === posDog.x && posPlayer.y === posDog.y) {
+        console.log("don't move left!collision!");
+        return true;
       } else {
-        console.log("not a collision");
+        return;
       }
     }
 
     if (direction === "right") {
-      if (
-        (posChar1.x + 1 === posChar2.x && posChar1.y === posChar2.y) ||
-        (posChar1.x === posChar2.x + 1 && posChar1.y === posChar2.y)
-      ) {
-        console.log("collision!");
+      if (posPlayer.x + 1 === posDog.x && posPlayer.y === posDog.y) {
+        console.log("don't move right!collision!");
+        return true;
       } else {
-        console.log("not a collision");
+        return;
       }
     }
+
+    // if (direction === "up") {
+    //   if (
+    //     (posChar1.x === posChar2.x && posChar1.y === posChar2.y - 1) ||
+    //     (posChar1.x === posChar2.x && posChar1.y - 1 === posChar2.y)
+    //   ) {
+    //     console.log("collision!");
+    //     return true;
+    //   } else {
+    //     console.log("not a collision");
+    //     return false;
+    //   }
+    // }
+
+    // if (direction === "down") {
+    //   if (
+    //     (posChar1.x === posChar2.x && posChar1.y === posChar2.y + 1) ||
+    //     (posChar1.x === posChar2.x && posChar1.y + 1 === posChar2.y)
+    //   ) {
+    //     console.log("collision!");
+    //     return true;
+    //   } else {
+    //     console.log("not a collision");
+    //     return false;
+    //   }
+    // }
+
+    // if (direction === "left") {
+    //   if (
+    //     (posChar1.x - 1 === posChar2.x && posChar1.y === posChar2.y) ||
+    //     (posChar1.x === posChar2.x - 1 && posChar1.y === posChar2.y)
+    //   ) {
+    //     console.log("collision!");
+    //   } else {
+    //     console.log("not a collision");
+    //   }
+    // }
+
+    // if (direction === "right") {
+    //   if (
+    //     (posChar1.x + 1 === posChar2.x && posChar1.y === posChar2.y) ||
+    //     (posChar1.x === posChar2.x + 1 && posChar1.y === posChar2.y)
+    //   ) {
+    //     console.log("collision!");
+    //   } else {
+    //     console.log("not a collision");
+    //   }
+    // }
   }
 
   canImoveNextPosition(column, row) {
