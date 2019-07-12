@@ -5,12 +5,23 @@ class Character {
     this.ctx = ctx;
     this.charSize = 30;
     this.color = color;
-    //this.tileSize = tileSize;
-    //this.position = position;
-    //this.design = design;
-    //this.tileFrom = tileFrom;
-    //this.tileTo = tileTo;
     this.map;
+  }
+
+  moveUp() {
+    this.y -= 40;
+  }
+
+  moveDown() {
+    this.y += 40;
+  }
+
+  moveLeft() {
+    this.x -= 40;
+  }
+
+  moveRight() {
+    this.x += 40;
   }
 
   getPosition() {
@@ -18,21 +29,4 @@ class Character {
     let newY = Math.floor(this.y / 40);
     return { x: newX, y: newY };
   }
-
-  /*moveRandom() {
-    //Use Math.random() to choose a direction
-    let left = 0;
-    let up = 1;
-    let right = 2;
-    let down = 3;
-    return Math.floor(Math.random() * Math.floor(4));
-  }
-
-
-  _drawCharacter() {
-    if (this.name === dog) {
-      (Map.ctx.fillRect = this.x), this.y, Map.tileSize, Map.tileSize;
-      Map.ctx.fillStyle = this.design;
-    }
-  }*/
 }

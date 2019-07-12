@@ -1,6 +1,6 @@
 class Game {
   constructor(options) {
-    const { ctx, map, player, tileSize, dog, poo } = options;
+    const { ctx, map, player, tileSize, dog, poo, neighbor } = options;
 
     this.ctx = ctx;
     this.map = map;
@@ -8,7 +8,9 @@ class Game {
     this.tileSize = tileSize;
     this.dog = dog;
     this.poo = poo;
-    this.counter = 0;
+    this.neighbor = neighbor;
+    this.dogSpeed = 0;
+    this.neighborSpeed = 0;
     this.gameOver = undefined;
   }
 
@@ -144,25 +146,21 @@ class Game {
     };
   }
 
-  // generatePoo() {
-  // setInterval(() => {
-  // console.log("I'm pooping!");
-  // console.log(this.dog.x, this.dog.y);
-  // this.ctx.fillStyle = "#48403C";
-  // this.ctx.fillRect(this.dog.x, this.dog.y, this.tileSize, this.tileSize);
-  // new Poo(this.ctx, this.tileSize, this.dog.x, this.dog.y);
-  // }, 5000);
-  // }
-
   update() {
-    this.counter++;
-    if (this.counter === 20) {
+    this.dogSpeed++;
+    if (this.dogSpeed === 20) {
       this.moveRandom();
-      this.counter = 0;
+      this.dogSpeed = 0;
+    }
+    this.neighborSpeed++;
+    if (this.neighborSpeed === 100) {
+      this.neighbor.moveRandomNeighbor();
+      this.neighborSpeed = 0;
     }
     this.map.drawMap();
     this.dog.drawDog();
     this.player.drawPlayer();
+    this.neighbor.drawNeighbor();
     //this.dog.generatePoo(this.dog.x, this.dog.y);
     //this.poo.drawPoo();
     this.intervalGame = window.requestAnimationFrame(this.update.bind(this));
@@ -173,7 +171,7 @@ class Game {
     let posPlayer = char1.getPosition();
     let posDog = char2.getPosition();
     if (direction === "up") {
-      if (char1.x === posDog.x && posPlayer.y - 1 === posDog.y) {
+      if (posPlayer.x === posDog.x && posPlayer.y - 1 === posDog.y) {
         console.log("don't move up!collision!");
         return true;
       } else {

@@ -22,9 +22,8 @@ document.onload = (function() {
     player: new Player(ctx, "#fff"),
     tileSize: tileSize,
     dog: new Dog(ctx),
-    poo: new Poo(ctx)
-    // tile: new Tile(),
-    // neighbor: new Neighbor(),
+    poo: new Poo(ctx),
+    neighbor: new Neighbor(ctx)
   });
   game.start();
 

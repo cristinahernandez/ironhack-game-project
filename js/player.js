@@ -32,10 +32,4 @@ class Player extends Character {
   moveRight() {
     this.x += 40;
   }
-
-  /*getPosition() {
-    let newX = Math.floor(this.x / 40);
-    let newY = Math.floor(this.y / 40);
-    return { x: newX, y: newY };
-  }*/
 }
