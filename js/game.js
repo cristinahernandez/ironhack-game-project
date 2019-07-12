@@ -9,11 +9,6 @@ class Game {
     this.dog = dog;
     this.poo = poo;
     this.counter = 0;
-    // this.position = position;
-    // this.design = design;
-    // this.poo = poo;
-    // this.neighbor = neighbor;
-
     this.gameOver = undefined;
   }
 
@@ -149,6 +144,16 @@ class Game {
     };
   }
 
+  // generatePoo() {
+  // setInterval(() => {
+  // console.log("I'm pooping!");
+  // console.log(this.dog.x, this.dog.y);
+  // this.ctx.fillStyle = "#48403C";
+  // this.ctx.fillRect(this.dog.x, this.dog.y, this.tileSize, this.tileSize);
+  // new Poo(this.ctx, this.tileSize, this.dog.x, this.dog.y);
+  // }, 5000);
+  // }
+
   update() {
     this.counter++;
     if (this.counter === 20) {
@@ -156,11 +161,10 @@ class Game {
       this.counter = 0;
     }
     this.map.drawMap();
-    //this.dog.updateSpeed();
     this.dog.drawDog();
     this.player.drawPlayer();
+    //this.dog.generatePoo(this.dog.x, this.dog.y);
     //this.poo.drawPoo();
-    //this.charCollision();
     this.intervalGame = window.requestAnimationFrame(this.update.bind(this));
   }
 
@@ -203,54 +207,6 @@ class Game {
         return;
       }
     }
-
-    // if (direction === "up") {
-    //   if (
-    //     (posChar1.x === posChar2.x && posChar1.y === posChar2.y - 1) ||
-    //     (posChar1.x === posChar2.x && posChar1.y - 1 === posChar2.y)
-    //   ) {
-    //     console.log("collision!");
-    //     return true;
-    //   } else {
-    //     console.log("not a collision");
-    //     return false;
-    //   }
-    // }
-
-    // if (direction === "down") {
-    //   if (
-    //     (posChar1.x === posChar2.x && posChar1.y === posChar2.y + 1) ||
-    //     (posChar1.x === posChar2.x && posChar1.y + 1 === posChar2.y)
-    //   ) {
-    //     console.log("collision!");
-    //     return true;
-    //   } else {
-    //     console.log("not a collision");
-    //     return false;
-    //   }
-    // }
-
-    // if (direction === "left") {
-    //   if (
-    //     (posChar1.x - 1 === posChar2.x && posChar1.y === posChar2.y) ||
-    //     (posChar1.x === posChar2.x - 1 && posChar1.y === posChar2.y)
-    //   ) {
-    //     console.log("collision!");
-    //   } else {
-    //     console.log("not a collision");
-    //   }
-    // }
-
-    // if (direction === "right") {
-    //   if (
-    //     (posChar1.x + 1 === posChar2.x && posChar1.y === posChar2.y) ||
-    //     (posChar1.x === posChar2.x + 1 && posChar1.y === posChar2.y)
-    //   ) {
-    //     console.log("collision!");
-    //   } else {
-    //     console.log("not a collision");
-    //   }
-    // }
   }
 
   canImoveNextPosition(column, row) {
@@ -320,9 +276,6 @@ class Game {
 
   start() {
     this.assignControlsToKeys();
-    ////////DRAW POO'S////////
-    ////////ASSIGN CONTROL TO KEYS////////
-
     //request the browser to call update before repainting the animation
     this.intervalGame = window.requestAnimationFrame(this.update.bind(this));
   }

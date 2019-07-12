@@ -1,9 +1,9 @@
 class Poo extends Character {
-  constructor(ctx, charSize) {
+  constructor(ctx, charSize, x, y) {
     super(ctx, charSize);
-    this.x = 285;
-    this.y = 125;
-    this.pooArray = [];
+    this.x = 85;
+    this.y = 45;
+    this.poo = this.drawPoo();
   }
 
   drawPoo() {
