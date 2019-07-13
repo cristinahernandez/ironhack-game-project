@@ -19,11 +19,10 @@ document.onload = (function() {
   let game = new Game({
     ctx: ctx,
     map: new Map(ctx, tileSize, map1),
-    player: new Player(ctx, "#fff"),
+    player: new Player(ctx, map1),
     tileSize: tileSize,
-    dog: new Dog(ctx),
-    poo: new Poo(ctx),
-    neighbor: new Neighbor(ctx)
+    dog: new Dog(ctx, map1),
+    neighbor: new Neighbor(ctx, map1)
   });
   game.start();
 

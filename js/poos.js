@@ -1,13 +1,14 @@
-class Poo extends Character {
+class Poo {
   constructor(ctx, charSize, x, y) {
-    super(ctx, charSize);
+    // super(ctx, charSize);
+    this.ctx = ctx;
+    this.charSize = charSize;
     this.x = x;
     this.y = y;
-    this.poo = this.drawPoo();
   }
 
   drawPoo() {
     this.ctx.fillStyle = "#48403C";
-    this.ctx.fillRect(this.x, this.y, this.charSize, this.charSize);
+    this.ctx.fillRect(this.x, this.y, 30, 30);
   }
 }

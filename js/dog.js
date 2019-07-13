@@ -9,36 +9,21 @@ class Dog extends Character {
     this.poosArray = [];
   }
 
-  //refactorizar drawCharacter
   drawDog() {
     this.ctx.fillStyle = "#418FDE";
     this.ctx.fillRect(this.x, this.y, this.charSize, this.charSize);
   }
 
-  moveUp() {
-    this.y -= 40;
-  }
-
-  moveDown() {
-    this.y += 40;
-  }
-
-  moveLeft() {
-    this.x -= 40;
-  }
-
-  moveRight() {
-    this.x += 40;
-  }
-
   generatePoo() {
-    setInterval(() => {
-      console.log("I'm pooping!");
-      console.log(this.x, this.y);
-      this.ctx.fillStyle = "#48403C";
-      this.ctx.fillRect(this.x, this.y, this.charSize, this.charSize);
-      //La idea es llamar a newPoo(this.ctx, this.charSize, this.x, this.y) y que pinte un poo
-      //Luego es hacer this.poosArray.push(newPoo(this.ctx, this.charSize, this.x, this.y))
-    }, 5000);
+    //setInterval(() => {
+    console.log("I'm pooping!");
+
+    this.ctx.fillStyle = "#48403C";
+    this.ctx.fillRect(this.x, this.y, this.charSize, this.charSize);
+    // let poo = New Poo(this.ctx, this.charSize, this.x, this.y);
+    // console.log(poo);
+    //La idea es llamar a newPoo(this.ctx, this.charSize, this.x, this.y) y que pinte un poo
+    //Luego es hacer this.poosArray.push(newPoo(this.ctx, this.charSize, this.x, this.y))
+    // }, 7000);
   }
 }

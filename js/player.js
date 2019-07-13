@@ -16,20 +16,4 @@ class Player extends Character {
     ctx.clearRect(0, 0, 400, 400);
     this.drawPlayer;
   }
-
-  moveUp() {
-    this.y -= 40;
-  }
-
-  moveDown() {
-    this.y += 40;
-  }
-
-  moveLeft() {
-    this.x -= 40;
-  }
-
-  moveRight() {
-    this.x += 40;
-  }
 }

@@ -1,17 +1,19 @@
 class Game {
   constructor(options) {
-    const { ctx, map, player, tileSize, dog, poo, neighbor } = options;
+    const { ctx, map, player, tileSize, dog, neighbor, poo } = options;
 
     this.ctx = ctx;
     this.map = map;
     this.player = player;
     this.tileSize = tileSize;
     this.dog = dog;
-    this.poo = poo;
     this.neighbor = neighbor;
     this.dogSpeed = 0;
     this.neighborSpeed = 0;
+    this.poopingSpeed = 0;
     this.gameOver = undefined;
+    this.poosArray = [];
+    this.poo = new Poo(this.ctx, 30, this.dog.x, this.dog.y);
   }
 
   moveRandom() {
@@ -154,15 +156,40 @@ class Game {
     }
     this.neighborSpeed++;
     if (this.neighborSpeed === 100) {
-      this.neighbor.moveRandomNeighbor();
+      this.neighbor.moveRandom();
       this.neighborSpeed = 0;
+    }
+    this.poopingSpeed++;
+    if (this.poopingSpeed === 200) {
+      this.poosArray.push(
+        new Poo(this.ctx, this.tileSize, this.dog.x, this.dog.y)
+      );
+      console.log(this.poosArray);
+      this.poopingSpeed = 0;
     }
     this.map.drawMap();
     this.dog.drawDog();
     this.player.drawPlayer();
     this.neighbor.drawNeighbor();
-    //this.dog.generatePoo(this.dog.x, this.dog.y);
-    //this.poo.drawPoo();
+
+    for (let i = 0; i < this.poosArray.length; i++) {
+      console.log("poo!");
+      this.poo.drawPoo();
+      //this.ctx.fillStyle = "#48403C";
+      //this.ctx.fillRect(this.dog.x, this.dog.y, 30, 30);
+    }
+    // bucle sobre poosArray
+    // por cada iteración, tienes un poo
+
+    // console.log(
+    // this.neighbor.isNextWakeable(
+    // this.neighbor.getPosition().x,
+    // this.neighbor.getPosition().y
+    // )
+    // );
+    //console.log(this.neighbor.this.map);
+    //console.log(this.neighbor.getPosition().x, this.neighbor.getPosition().y);
+    //this.neighbor.checkMapCollision();
     this.intervalGame = window.requestAnimationFrame(this.update.bind(this));
   }
 
@@ -172,7 +199,7 @@ class Game {
     let posDog = char2.getPosition();
     if (direction === "up") {
       if (posPlayer.x === posDog.x && posPlayer.y - 1 === posDog.y) {
-        console.log("don't move up!collision!");
+        //console.log("don't move up!collision!");
         return true;
       } else {
         return;
@@ -181,7 +208,7 @@ class Game {
 
     if (direction === "down") {
       if (posPlayer.x === posDog.x && posPlayer.y + 1 === posDog.y) {
-        console.log("don't move down!collision!");
+        //console.log("don't move down!collision!");
         return true;
       } else {
         return;
@@ -190,7 +217,7 @@ class Game {
 
     if (direction === "left") {
       if (posPlayer.x - 1 === posDog.x && posPlayer.y === posDog.y) {
-        console.log("don't move left!collision!");
+        //console.log("don't move left!collision!");
         return true;
       } else {
         return;
@@ -199,7 +226,7 @@ class Game {
 
     if (direction === "right") {
       if (posPlayer.x + 1 === posDog.x && posPlayer.y === posDog.y) {
-        console.log("don't move right!collision!");
+        //console.log("don't move right!collision!");
         return true;
       } else {
         return;
