@@ -2,7 +2,7 @@ class Neighbor extends Character {
   constructor(ctx, charSize) {
     super(ctx);
     this.x = 325;
-    this.y = 325;
+    this.y = 205;
     //this.stepping = this.stepPoo();
   }
 
