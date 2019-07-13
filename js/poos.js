@@ -9,6 +9,6 @@ class Poo {
 
   drawPoo() {
     this.ctx.fillStyle = "#48403C";
-    this.ctx.fillRect(this.x, this.y, 30, 30);
+    this.ctx.fillRect(this.x + 10, this.y + 10, 10, 10);
   }
 }

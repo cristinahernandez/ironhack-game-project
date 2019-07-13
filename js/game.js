@@ -108,6 +108,12 @@ class Game {
     }
   }
 
+  //collision Player with Poos
+  checkCollisionPoos() {
+    let playerX = this.player.x;
+    console.log(playerX);
+  }
+
   //player controller with keyboard
   assignControlsToKeys() {
     document.onkeydown = e => {
@@ -160,10 +166,8 @@ class Game {
       this.neighborSpeed = 0;
     }
     this.poopingSpeed++;
-    if (this.poopingSpeed === 200) {
-      this.poosArray.push(
-        new Poo(this.ctx, this.tileSize, this.dog.x, this.dog.y)
-      );
+    if (this.poopingSpeed === 450) {
+      this.poosArray.push(new Poo(this.ctx, 30, this.dog.x, this.dog.y));
       console.log(this.poosArray);
       this.poopingSpeed = 0;
     }
@@ -172,12 +176,9 @@ class Game {
     this.player.drawPlayer();
     this.neighbor.drawNeighbor();
 
-    for (let i = 0; i < this.poosArray.length; i++) {
-      console.log("poo!");
-      this.poo.drawPoo();
-      //this.ctx.fillStyle = "#48403C";
-      //this.ctx.fillRect(this.dog.x, this.dog.y, 30, 30);
-    }
+    this.poosArray.forEach(poo => {
+      poo.drawPoo();
+    });
     // bucle sobre poosArray
     // por cada iteración, tienes un poo
 
