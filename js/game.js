@@ -14,6 +14,7 @@ class Game {
     this.gameOver = undefined;
     this.poosArray = [];
     this.poo = new Poo(this.ctx, 30, this.dog.x, this.dog.y);
+    this.gameScore = 0;
   }
 
   //to move DOG or Neighbor
@@ -95,22 +96,50 @@ class Game {
     };
   }
 
-  winPoints() {
-    console.log("you won 4 points!");
+  //paint poos
+  drawPoo() {
+    this.poosArray.forEach(poo => {
+      poo.drawPoo();
+    });
   }
 
   //pick up poos
-  pickPoos() {
-    //if (this.poosArray.length > 0) {
-    this.poosArray.forEach((poo, i) => {
+  pickYourShit() {
+    for (let i = 0; i < this.poosArray.length; i++) {
       if (
-        poo.getPosition().x === this.player.getPosition().x &&
-        poo.getPosition().y === this.player.getPosition().y
-      )
+        this.poosArray[i].getPosition().x === this.player.getPosition().x &&
+        this.poosArray[i].getPosition().y === this.player.getPosition().y
+      ) {
         this.poosArray.splice(i, 1);
-      this.winPoints();
-    });
+        this.gameScore = this.gameScore + 1;
+        console.log(this.gameScore);
+      }
+    }
+    // if (this.poosArray.length > 0) {
+    // this.poosArray.forEach((poo, i) => {
+    // if (
+    // poo.getPosition().x === this.player.getPosition().x &&
+    // poo.getPosition().y === this.player.getPosition().y
+    // )
+    // this.poosArray.splice(i, 1);
+    // this.gameScore++;
+    // console.log(this.gameScore);
+    // });
     //}
+  }
+
+  //pick up poos
+  neighborStepsPoo() {
+    for (let i = 0; i < this.poosArray.length; i++) {
+      if (
+        this.poosArray[i].getPosition().x === this.neighbor.getPosition().x &&
+        this.poosArray[i].getPosition().y === this.neighbor.getPosition().y
+      ) {
+        this.poosArray.splice(i, 1);
+        this.gameScore = this.gameScore - 2;
+        console.log(this.gameScore);
+      }
+    }
   }
 
   update() {
@@ -137,13 +166,10 @@ class Game {
     this.dog.drawDog();
     this.player.drawPlayer();
     this.neighbor.drawNeighbor();
+    this.drawPoo();
 
-    //paint poos
-    this.poosArray.forEach(poo => {
-      poo.drawPoo();
-    });
-
-    this.pickPoos();
+    this.pickYourShit();
+    this.neighborStepsPoo();
 
     this.intervalGame = window.requestAnimationFrame(this.update.bind(this));
   }
