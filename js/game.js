@@ -23,7 +23,7 @@ class Game {
       case 0:
         if (
           this.checkMapCollision("up", char1) &&
-          !this.charCollision("up", this.dog, this.player, this.neighbor)
+          !this.charCollision("up", this.dog, this.neighbor, this.player)
         ) {
           char1.moveUp();
         }
@@ -31,7 +31,7 @@ class Game {
       case 1:
         if (
           this.checkMapCollision("down", char1) &&
-          !this.charCollision("down", this.dog, this.player, this.neighbor)
+          !this.charCollision("down", this.dog, this.neighbor, this.player)
         ) {
           char1.moveDown();
         }
@@ -39,7 +39,7 @@ class Game {
       case 2:
         if (
           this.checkMapCollision("left", char1) &&
-          !this.charCollision("left", this.dog, this.player, this.neighbor)
+          !this.charCollision("left", this.dog, this.neighbor, this.player)
         ) {
           char1.moveLeft();
         }
@@ -47,7 +47,7 @@ class Game {
       case 3:
         if (
           this.checkMapCollision("right", char1) &&
-          !this.charCollision("right", this.dog, this.player, this.neighbor)
+          !this.charCollision("right", this.dog, this.neighbor, this.player)
         ) {
           char1.moveRight();
         }
@@ -95,6 +95,24 @@ class Game {
     };
   }
 
+  winPoints() {
+    console.log("you won 4 points!");
+  }
+
+  //pick up poos
+  pickPoos() {
+    //if (this.poosArray.length > 0) {
+    this.poosArray.forEach((poo, i) => {
+      if (
+        poo.getPosition().x === this.player.getPosition().x &&
+        poo.getPosition().y === this.player.getPosition().y
+      )
+        this.poosArray.splice(i, 1);
+      this.winPoints();
+    });
+    //}
+  }
+
   update() {
     //dog speed controller
     this.dogSpeed++;
@@ -125,16 +143,8 @@ class Game {
       poo.drawPoo();
     });
 
-    //pick up poos
-    if (this.poosArray.length > 0) {
-      this.poosArray.forEach((poo, i) => {
-        if (
-          poo.getPosition().x === this.player.getPosition().x &&
-          poo.getPosition().y === this.player.getPosition().y
-        )
-          this.poosArray.splice(i, 1);
-      });
-    }
+    this.pickPoos();
+
     this.intervalGame = window.requestAnimationFrame(this.update.bind(this));
   }
 
@@ -159,7 +169,8 @@ class Game {
       if (
         (posChar1.x === posChar2.x && posChar1.y + 1 === posChar2.y) ||
         (posChar1.x === posChar3.x && posChar1.y + 1 === posChar3.y) ||
-        (posChar2.x === posChar3.x && posChar2.y + 1 === posChar3.y)
+        (posChar2.x === posChar3.x && posChar2.y + 1 === posChar3.y) ||
+        (posChar3.x === posChar1.x && posChar3.y + 1 === posChar1.y)
       ) {
         //console.log("don't move down!collision!");
         return true;
