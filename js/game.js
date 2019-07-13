@@ -108,12 +108,6 @@ class Game {
     }
   }
 
-  //collision Player with Poos
-  checkCollisionPoos() {
-    let playerX = this.player.x;
-    console.log(playerX);
-  }
-
   //player controller with keyboard
   assignControlsToKeys() {
     document.onkeydown = e => {
@@ -154,6 +148,11 @@ class Game {
     };
   }
 
+  //collision Player with Poos
+  checkCollisionPoos(poo) {
+    return this.poo.getPosition() === this.player.getPosition();
+  }
+
   update() {
     this.dogSpeed++;
     if (this.dogSpeed === 20) {
@@ -168,7 +167,7 @@ class Game {
     this.poopingSpeed++;
     if (this.poopingSpeed === 450) {
       this.poosArray.push(new Poo(this.ctx, 30, this.dog.x, this.dog.y));
-      console.log(this.poosArray);
+      //console.log(this.poosArray);
       this.poopingSpeed = 0;
     }
     this.map.drawMap();
@@ -179,9 +178,10 @@ class Game {
     this.poosArray.forEach(poo => {
       poo.drawPoo();
     });
-    // bucle sobre poosArray
-    // por cada iteración, tienes un poo
 
+    // if (this.poosArray.length > 0) {
+    // console.log(this.poosArray.some(this.checkCollisionPoos(poo)));
+    // }
     // console.log(
     // this.neighbor.isNextWakeable(
     // this.neighbor.getPosition().x,
