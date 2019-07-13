@@ -136,7 +136,7 @@ class Game {
         this.poosArray[i].getPosition().y === this.neighbor.getPosition().y
       ) {
         this.poosArray.splice(i, 1);
-        this.gameScore = this.gameScore - 2;
+        this.gameScore = this.gameScore - 4;
         console.log(this.gameScore);
       }
     }
@@ -151,13 +151,13 @@ class Game {
     }
     //neighbor speed controller
     this.neighborSpeed++;
-    if (this.neighborSpeed === 60) {
+    if (this.neighborSpeed === 10) {
       this.moveRandom(this.neighbor);
       this.neighborSpeed = 0;
     }
     //pooping speed controller
     this.poopingSpeed++;
-    if (this.poopingSpeed === 200) {
+    if (this.poopingSpeed === 60) {
       this.poosArray.push(new Poo(this.ctx, 30, this.dog.x, this.dog.y));
       this.poopingSpeed = 0;
     }
@@ -170,6 +170,10 @@ class Game {
 
     this.pickYourShit();
     this.neighborStepsPoo();
+
+    if (this.gameScore < 0) {
+      this.gameOver();
+    }
 
     this.intervalGame = window.requestAnimationFrame(this.update.bind(this));
   }
