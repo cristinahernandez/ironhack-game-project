@@ -3,12 +3,20 @@ class Neighbor extends Character {
     super(ctx);
     this.x = 325;
     this.y = 205;
-    //this.stepping = this.stepPoo();
+    this.neighborImage = new Image();
+    this.neighborImage.src = "./assets/grandma.png";
   }
 
   drawNeighbor() {
-    this.ctx.fillStyle = "#8E4483";
-    this.ctx.fillRect(this.x, this.y, this.charSize, this.charSize);
+    this.ctx.drawImage(
+      this.neighborImage,
+      this.x,
+      this.y,
+      this.charSize,
+      this.charSize
+    );
+    // this.ctx.fillStyle = "#8E4483";
+    // this.ctx.fillRect(this.x, this.y, this.charSize, this.charSize);
   }
 
   stepPoo() {

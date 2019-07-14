@@ -1,9 +1,10 @@
 class Game {
   constructor(options) {
-    const { ctx, map, player, tileSize, dog, neighbor, poo } = options;
+    const { ctx, map, player, tileSize, dog, neighbor, poo, tilemap } = options;
 
     this.ctx = ctx;
     this.map = map;
+    this.tilemap = tilemap;
     this.player = player;
     this.tileSize = tileSize;
     this.dog = dog;
@@ -13,8 +14,46 @@ class Game {
     this.poopingSpeed = 0;
     this.gameOver = undefined;
     this.poosArray = [];
-    this.poo = new Poo(this.ctx, 30, this.dog.x, this.dog.y);
+    this.poo = new Poo(this.ctx, this.tileSize - 10, this.dog.x, this.dog.y);
     this.gameScore = 0;
+  }
+
+  update() {
+    //dog speed controller
+    this.dogSpeed++;
+    if (this.dogSpeed === 10) {
+      this.moveRandom(this.dog);
+      this.dogSpeed = 0;
+    }
+    //neighbor speed controller
+    this.neighborSpeed++;
+    if (this.neighborSpeed === 10) {
+      this.moveRandom(this.neighbor);
+      this.neighborSpeed = 0;
+    }
+    //pooping speed controller
+    this.poopingSpeed++;
+    if (this.poopingSpeed === 60) {
+      this.poosArray.push(
+        new Poo(this.ctx, this.tileSize - 10, this.dog.x, this.dog.y)
+      );
+      this.poopingSpeed = 0;
+    }
+    //paint characters
+    this.map.drawMap();
+    this.dog.drawDog();
+    this.player.drawPlayer();
+    this.neighbor.drawNeighbor();
+    this.drawPoo();
+
+    this.pickYourShit();
+    this.neighborStepsPoo();
+
+    if (this.gameScore < 0) {
+      this.gameOver();
+    }
+
+    this.intervalGame = window.requestAnimationFrame(this.update.bind(this));
   }
 
   //to move DOG or Neighbor
@@ -140,42 +179,6 @@ class Game {
         console.log(this.gameScore);
       }
     }
-  }
-
-  update() {
-    //dog speed controller
-    this.dogSpeed++;
-    if (this.dogSpeed === 10) {
-      this.moveRandom(this.dog);
-      this.dogSpeed = 0;
-    }
-    //neighbor speed controller
-    this.neighborSpeed++;
-    if (this.neighborSpeed === 10) {
-      this.moveRandom(this.neighbor);
-      this.neighborSpeed = 0;
-    }
-    //pooping speed controller
-    this.poopingSpeed++;
-    if (this.poopingSpeed === 60) {
-      this.poosArray.push(new Poo(this.ctx, 30, this.dog.x, this.dog.y));
-      this.poopingSpeed = 0;
-    }
-    //paint characters
-    this.map.drawMap();
-    this.dog.drawDog();
-    this.player.drawPlayer();
-    this.neighbor.drawNeighbor();
-    this.drawPoo();
-
-    this.pickYourShit();
-    this.neighborStepsPoo();
-
-    if (this.gameScore < 0) {
-      this.gameOver();
-    }
-
-    this.intervalGame = window.requestAnimationFrame(this.update.bind(this));
   }
 
   //check collisions between characters

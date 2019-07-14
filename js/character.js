@@ -1,13 +1,14 @@
 //Define Character class
 
 class Character {
-  constructor(ctx, map) {
+  constructor(ctx, map, tileSize) {
     this.ctx = ctx;
     this.charSize = 30;
     this.map = map;
+    this.tileSize = this.tileSize;
   }
 
-  //get x and y of the Character
+  //get x and y of the Characterº
   getPosition() {
     let newX = Math.floor(this.x / 40);
     let newY = Math.floor(this.y / 40);
