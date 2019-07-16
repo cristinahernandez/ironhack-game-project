@@ -16,6 +16,7 @@ class Game {
     this.poosArray = [];
     this.poo = new Poo(this.ctx, this.tileSize - 10, this.dog.x, this.dog.y);
     this.gameScore = 0;
+    this.gameState = undefined;
   }
 
   update() {
@@ -50,10 +51,19 @@ class Game {
     this.neighborStepsPoo();
 
     if (this.gameScore < 0) {
-      this.gameOver();
+      document.getElementById("pickit").style = "display: none;";
+      document.getElementsByTagName("pickit").style = "filter: blur(0px);";
+      let gameOver = document.getElementById("gameover-screen");
+      this.ctx.style = "display: none";
+      gameOver.style = "display: block";
+      this.pause();
     }
 
-    this.intervalGame = window.requestAnimationFrame(this.update.bind(this));
+    // la funcion de abajo sabe cuando tiene que volver a llamar la funcion que se pasa por parametro;
+    if (this.intervalGame !== undefined) {
+      window.requestAnimationFrame(this.update.bind(this));
+    }
+    //this.intervalGame = window.requestAnimationFrame(this.update.bind(this));
   }
 
   //to move DOG or Neighbor
@@ -279,6 +289,16 @@ class Game {
       }
     }
   }
+
+  // gameState() {
+  //   switch (this.) {
+  //     case "running":
+  //       this._update();
+  //       break;
+  //     case "paused":
+  //       break;
+  //   }
+  // }
 
   pause() {
     if (this.intervalGame) {

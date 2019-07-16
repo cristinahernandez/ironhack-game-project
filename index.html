@@ -9,9 +9,21 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <canvas id="pickit" width="400" height="400"></canvas>
-    <div id="gameover" style="display: none">
-      Game Over
+    <div id="game-container">
+      <div id="start-screen">
+        <p>So your friend has eaten a looot and it's time to walk!</p>
+        <p>Prepare yourself to pick as many poops as you can.</p>
+        <p>
+          Remember it's your responsability if someone steps on it, be careful
+          or you'll loose!
+        </p>
+        <button id="startButton">START</button>
+      </div>
+      <canvas id="pickit" width="400" height="400"></canvas>
+      <div id="pause-screen"></div>
+      <div id="gameover-screen" style="display: none">
+        Game Over
+      </div>
     </div>
     <script src="js/map.js"></script>
     <script src="js/tilemap.js"></script>
