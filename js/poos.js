@@ -1,6 +1,5 @@
 class Poo {
   constructor(ctx, charSize, x, y, tileSize) {
-    // super(ctx, charSize);
     this.ctx = ctx;
     this.charSize = charSize;
     this.x = x;

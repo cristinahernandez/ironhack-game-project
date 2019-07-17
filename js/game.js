@@ -1,72 +1,134 @@
 class Game {
   constructor(options) {
-    const { ctx, map, player, tileSize, dog, neighbor, poo, tilemap } = options;
+    const { ctx, map, player, tileSize, dog, neighbor, poo } = options;
 
     this.ctx = ctx;
     this.map = map;
-    this.tilemap = tilemap;
     this.player = player;
     this.tileSize = tileSize;
     this.dog = dog;
-    this.neighbor = neighbor;
     this.dogSpeed = 0;
-    this.neighborSpeed = 0;
-    this.poopingSpeed = 0;
-    this.gameOver = undefined;
     this.poosArray = [];
-    this.poo = new Poo(this.ctx, this.tileSize - 10, this.dog.x, this.dog.y);
+    //this.poo = new Poo(this.ctx, this.tileSize - 10, this.dog.x, this.dog.y);
+    this.poopingSpeed = 0;
+    this.neighbor = neighbor;
+    this.neighborSpeed = 0;
+    this.gameOver = undefined;
     this.gameScore = 0;
-    this.gameState = undefined;
+    this.firstPoo = false;
   }
 
+  makePoo() {
+    this.poosArray.push(
+      new Poo(this.ctx, this.tileSize - 10, this.dog.x, this.dog.y)
+    );
+  }
+
+  drawPoo() {
+    this.poosArray.forEach(poo => {
+      poo.drawPoo();
+    });
+  }
+
+  checkPoos(arr, val) {
+    return arr.some(arrVal => {
+      return val.x === arrVal.x && val.y === arrVal.y;
+    });
+  }
+
+  ////LOOP////
+
   update() {
+    this.map.drawMap();
     //dog speed controller
     this.dogSpeed++;
     if (this.dogSpeed === 10) {
       this.moveRandom(this.dog);
       this.dogSpeed = 0;
     }
+
     //neighbor speed controller
     this.neighborSpeed++;
     if (this.neighborSpeed === 10) {
       this.moveRandom(this.neighbor);
       this.neighborSpeed = 0;
     }
-    //pooping speed controller
+
+    //dog pooping
     this.poopingSpeed++;
+
     if (this.poopingSpeed === 60) {
-      this.poosArray.push(
-        new Poo(this.ctx, this.tileSize - 10, this.dog.x, this.dog.y)
-      );
+      if (!this.firstPoo) {
+        this.makePoo();
+        this.poopingSpeed = 0;
+        this.firstPoo = true;
+      }
+    }
+    if (this.poopingSpeed === 60) {
+      if (!this.checkPoos(this.poosArray, this.dog)) {
+        this.makePoo();
+      }
       this.poopingSpeed = 0;
     }
-    //paint characters
-    this.map.drawMap();
+
+    //pooping speed controller
+    // this.poopingSpeed++;
+    // if (this.poopingSpeed === 60) {
+    // if (!this.firstPoo) {
+    // this.makePoo();
+    // }
+    // this.poosArray.forEach(poo => {
+    // let dogX = this.dog.x;
+    // let dogY = this.dog.y;
+    // let pooX = poo.x;
+    // let pooY = poo.y;
+    // if (dogX === pooX && dogY === pooY) {
+    // console.log("Ha cagao en el mismo sitio");
+    // } else {
+    // console.log("Puede cagar aquí");
+    // this.makePoo();
+    // }
+    // });
+    //this.makePoo();
+    // this.poopingSpeed = 0;
+    // }
+
+    //display characters
+    //this.map.drawMap();
+    this.drawPoo();
     this.dog.drawDog();
     this.player.drawPlayer();
     this.neighbor.drawNeighbor();
-    this.drawPoo();
 
+    //Player picks up poops
     this.pickYourShit();
+
+    //When Neighbor Steps Poops
     this.neighborStepsPoo();
 
+    //GameOver
     if (this.gameScore < 0) {
+      //Hide canvas Game
       document.getElementById("pickit").style = "display: none;";
-      document.getElementsByTagName("pickit").style = "filter: blur(0px);";
+      //this.ctx.style = "display: none";
+
+      //Display Game Over screen
       let gameOver = document.getElementById("gameover-screen");
-      this.ctx.style = "display: none";
       gameOver.style = "display: block";
+
+      //Pause the loop Game
       this.pause();
     }
 
-    // la funcion de abajo sabe cuando tiene que volver a llamar la funcion que se pasa por parametro;
+    // Loop
     if (this.intervalGame !== undefined) {
       window.requestAnimationFrame(this.update.bind(this));
     }
-    //this.intervalGame = window.requestAnimationFrame(this.update.bind(this));
   }
 
-  //to move DOG or Neighbor
+  ////END LOOP////
+
+  //move DOG or Neighbor
   moveRandom(char1) {
     let getRandomNum = Math.floor(Math.random() * Math.floor(4));
     switch (getRandomNum) {
@@ -76,6 +138,7 @@ class Game {
           !this.charCollision("up", this.dog, this.neighbor, this.player)
         ) {
           char1.moveUp();
+          //changeDirectionUp();
         }
         break;
       case 1:
@@ -115,6 +178,7 @@ class Game {
             !this.charCollision("up", this.player, this.dog, this.neighbor)
           ) {
             this.player.moveUp();
+            //console.log(this.player);
           }
           break;
         case 40: // arrow down
@@ -145,13 +209,6 @@ class Game {
     };
   }
 
-  //paint poos
-  drawPoo() {
-    this.poosArray.forEach(poo => {
-      poo.drawPoo();
-    });
-  }
-
   //pick up poos
   pickYourShit() {
     for (let i = 0; i < this.poosArray.length; i++) {
@@ -164,17 +221,6 @@ class Game {
         console.log(this.gameScore);
       }
     }
-    // if (this.poosArray.length > 0) {
-    // this.poosArray.forEach((poo, i) => {
-    // if (
-    // poo.getPosition().x === this.player.getPosition().x &&
-    // poo.getPosition().y === this.player.getPosition().y
-    // )
-    // this.poosArray.splice(i, 1);
-    // this.gameScore++;
-    // console.log(this.gameScore);
-    // });
-    //}
   }
 
   //pick up poos
@@ -289,16 +335,6 @@ class Game {
       }
     }
   }
-
-  // gameState() {
-  //   switch (this.) {
-  //     case "running":
-  //       this._update();
-  //       break;
-  //     case "paused":
-  //       break;
-  //   }
-  // }
 
   pause() {
     if (this.intervalGame) {

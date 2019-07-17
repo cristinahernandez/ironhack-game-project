@@ -1,8 +1,8 @@
 //Define Player
 
 class Player extends Character {
-  constructor(ctx, tileSize, charSize) {
-    super(ctx, charSize, tileSize);
+  constructor(ctx, tileSize, map) {
+    super(ctx, tileSize, map);
     this.x = 45;
     this.y = 45;
     this.playerImage = new Image();
