@@ -29,6 +29,7 @@ document.onload = (function() {
     //Display Canvas Game
     document.getElementById("splash-screen").style = "display: none;";
     document.getElementById("pickit").style = "display: block;";
+    document.getElementById("score-screen").style = "display: block;";
 
     //Game object
     game = new Game({

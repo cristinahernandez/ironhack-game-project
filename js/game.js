@@ -218,7 +218,8 @@ class Game {
       ) {
         this.poosArray.splice(i, 1);
         this.gameScore = this.gameScore + 1;
-        console.log(this.gameScore);
+        //console.log(this.gameScore);
+        document.getElementById("gameScore").innerHTML = this.gameScore;
       }
     }
   }
