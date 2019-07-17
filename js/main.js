@@ -22,7 +22,7 @@ document.onload = (function() {
   let game;
 
   //START button event
-  let startButton = document.getElementById("startButton");
+  let startButton = document.getElementById("start-button");
   startButton.addEventListener("click", startGame);
 
   function startGame() {
@@ -44,4 +44,27 @@ document.onload = (function() {
     //START game
     game.start();
   }
+
+  //PLAY AGAIN
+  let restartButton = document.getElementById("restart-button");
+  restartButton.addEventListener("click", function() {
+    //Display Canvas Game
+    document.getElementById("splash-screen").style = "display: none;";
+    document.getElementById("winner-screen").style = "display: none;";
+    document.getElementById("pickit").style = "display: block;";
+    document.getElementById("score-screen").style = "display: block;";
+
+    //Game object
+    game = new Game({
+      ctx: ctx,
+      map: new Map(ctx, tileSize, map1),
+      player: new Player(ctx, tileSize, map1),
+      tileSize: tileSize,
+      dog: new Dog(ctx, tileSize, map1),
+      neighbor: new Neighbor(ctx, tileSize, map1)
+    });
+
+    //START game
+    game.start();
+  });
 })();

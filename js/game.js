@@ -16,6 +16,8 @@ class Game {
     this.gameOver = undefined;
     this.gameScore = 0;
     this.firstPoo = false;
+    this.timerSpeed = 0;
+    this.walkingTime = 30;
   }
 
   makePoo() {
@@ -39,7 +41,14 @@ class Game {
   ////LOOP////
 
   update() {
-    this.map.drawMap();
+    //Time runs
+    this.timerSpeed++;
+    if (this.timerSpeed === 60) {
+      this.walkingTime = this.walkingTime - 1;
+      document.getElementById("game-timer").innerHTML = this.walkingTime;
+      this.timerSpeed = 0;
+    }
+
     //dog speed controller
     this.dogSpeed++;
     if (this.dogSpeed === 10) {
@@ -71,30 +80,8 @@ class Game {
       this.poopingSpeed = 0;
     }
 
-    //pooping speed controller
-    // this.poopingSpeed++;
-    // if (this.poopingSpeed === 60) {
-    // if (!this.firstPoo) {
-    // this.makePoo();
-    // }
-    // this.poosArray.forEach(poo => {
-    // let dogX = this.dog.x;
-    // let dogY = this.dog.y;
-    // let pooX = poo.x;
-    // let pooY = poo.y;
-    // if (dogX === pooX && dogY === pooY) {
-    // console.log("Ha cagao en el mismo sitio");
-    // } else {
-    // console.log("Puede cagar aquí");
-    // this.makePoo();
-    // }
-    // });
-    //this.makePoo();
-    // this.poopingSpeed = 0;
-    // }
-
     //display characters
-    //this.map.drawMap();
+    this.map.drawMap();
     this.drawPoo();
     this.dog.drawDog();
     this.player.drawPlayer();
@@ -106,8 +93,21 @@ class Game {
     //When Neighbor Steps Poops
     this.neighborStepsPoo();
 
+    //Win
+    if (this.gameScore === 10 && this.walkingTime <= 30) {
+      //Hide canvas Game and score screen
+      document.getElementById("pickit").style = "display: none;";
+      document.getElementById("score-screen").style = "display: none;";
+      //Display Game Over screen
+      let winnerScreen = document.getElementById("winner-screen");
+      winnerScreen.style = "display: block";
+
+      //Pause the loop Game
+      this.pause();
+    }
+
     //GameOver
-    if (this.gameScore < 0) {
+    if (this.walkingTime === 0) {
       //Hide canvas Game
       document.getElementById("pickit").style = "display: none;";
       //this.ctx.style = "display: none";
@@ -115,6 +115,8 @@ class Game {
       //Display Game Over screen
       let gameOver = document.getElementById("gameover-screen");
       gameOver.style = "display: block";
+      document.getElementById("winner-screen").style = "display: none;";
+      document.getElementById("score-screen").style = "display: none;";
 
       //Pause the loop Game
       this.pause();
@@ -218,8 +220,8 @@ class Game {
       ) {
         this.poosArray.splice(i, 1);
         this.gameScore = this.gameScore + 1;
-        //console.log(this.gameScore);
-        document.getElementById("gameScore").innerHTML = this.gameScore;
+        console.log(this.gameScore);
+        document.getElementById("game-score").innerHTML = this.gameScore;
       }
     }
   }
@@ -232,7 +234,12 @@ class Game {
         this.poosArray[i].getPosition().y === this.neighbor.getPosition().y
       ) {
         this.poosArray.splice(i, 1);
-        this.gameScore = this.gameScore - 4;
+        if (this.gameScore >= 4) {
+          this.gameScore = this.gameScore - 4;
+        } else {
+          this.gameScore = 0;
+        }
+        document.getElementById("game-score").innerHTML = this.gameScore;
         console.log(this.gameScore);
       }
     }
