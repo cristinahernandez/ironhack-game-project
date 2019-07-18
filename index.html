@@ -5,19 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Pick your sh**!</title>
-
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Rubik:400,700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
     <div id="game-container">
       <div id="splash-screen">
-        <p>So your friend has eaten a looot and it's time to walk!</p>
-        <p>Prepare yourself to pick as many poops as you can.</p>
-        <p>
-          Remember it's your responsability if someone steps on it, be careful
-          or you'll loose!
-        </p>
-        <button id="start-button">START</button>
+        <div class="logo">
+          <img src="assets/pickupyourshit_logo_main.png" width="100%" />
+        </div>
+        <div class="controls">
+          <p class="text-center">
+            <a href="#" id="start-button"><img src="assets/start-100.png"/></a>
+          </p>
+        </div>
+        <!-- <div class="game-intro">
+          <h2>INSTRUCTIONS</h2>
+          <p>It's time to take a walk with your friend!</p>
+          <p>
+            He has eaten a looot and you must pick up at least 10 poos before
+            walking time is over.
+          </p>
+          <p>Use your keyboard arrows to move around.</p>
+        </div>
+        <div class="game-warning">
+          <h2>WARNING!</h2>
+          <p>
+            This grumpy neighbor you have is taking a walk as well. Be aware!
+            Each pooh she steps on, will rest you 4 points!
+          </p>
+        </div> -->
       </div>
       <canvas id="pickit" width="400" height="400"></canvas>
       <div id="score-screen" style="display:none">

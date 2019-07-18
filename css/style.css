@@ -1,6 +1,59 @@
+body {
+  background-image: linear-gradient(
+    45deg,
+    #6e655d 25%,
+    #48403c 25%,
+    #48403c 50%,
+    #6e655d 50%,
+    #6e655d 75%,
+    #48403c 75%,
+    #48403c 100%
+  );
+  background-size: 2.83px 2.83px;
+}
 #game-container {
-  width: 400px;
-  height: 400px;
+  margin-top: 5%;
+  width: 800px;
+  height: 530px;
   margin-left: auto;
   margin-right: auto;
 }
+
+#splash-screen {
+  background: url("../assets/splash-screen.png") no-repeat top center;
+  background-size: cover;
+  padding-top: 5.5em;
+  min-height: 533px;
+}
+
+#splash-screen .logo {
+  margin-left: auto;
+  margin-right: auto;
+  width: 75%;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* #splash-screen .game-intro,
+#splash-screen .game-warning {
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2em;
+}
+
+#splash-screen .game-intro h2,
+#splash-screen .game-warning h2 {
+  font-family: "Rubik", sans-serif;
+  font-weight: bold;
+  font-size: 2em;
+  color: #6e655d;
+}
+
+#splash-screen p {
+  font-family: "Rubik", sans-serif;
+  color: #6e655d;
+  font-size: 1.2em;
+} */
