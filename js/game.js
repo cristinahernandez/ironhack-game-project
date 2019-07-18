@@ -17,7 +17,7 @@ class Game {
     this.gameScore = 0;
     this.firstPoo = false;
     this.timerSpeed = 0;
-    this.walkingTime = 30;
+    this.walkingTime = 20;
   }
 
   makePoo() {
@@ -68,6 +68,7 @@ class Game {
 
     if (this.poopingSpeed === 60) {
       if (!this.firstPoo) {
+        // resto uno al contador de cacas
         this.makePoo();
         this.poopingSpeed = 0;
         this.firstPoo = true;
@@ -75,6 +76,8 @@ class Game {
     }
     if (this.poopingSpeed === 60) {
       if (!this.checkPoos(this.poosArray, this.dog)) {
+        // resto uno al contador de cacas
+        // si el contador llega a 0, llamo a gameOver
         this.makePoo();
       }
       this.poopingSpeed = 0;
@@ -115,7 +118,7 @@ class Game {
       //Display Game Over screen
       let gameOver = document.getElementById("gameover-screen");
       gameOver.style = "display: block";
-      document.getElementById("winner-screen").style = "display: none;";
+      // document.getElementById("winner-screen").style = "display: none;";
       document.getElementById("score-screen").style = "display: none;";
 
       //Pause the loop Game

@@ -1,7 +1,6 @@
 class Map {
   constructor(ctx, tileSize, map) {
     this.tileSize = tileSize;
-    //this.design = design;
     this.map = map;
     this.ctx = ctx;
     this.tileImage = new Image();

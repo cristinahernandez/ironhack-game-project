@@ -32,6 +32,11 @@ body {
   width: 75%;
 }
 
+#canvas-screen canvas {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .text-center {
   text-align: center;
 }

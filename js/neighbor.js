@@ -1,6 +1,6 @@
 class Neighbor extends Character {
-  constructor(ctx, charSize) {
-    super(ctx);
+  constructor(ctx, tileSize, charSize) {
+    super(ctx, tileSize);
     this.x = 325;
     this.y = 205;
     this.neighborImage = new Image();

@@ -41,18 +41,21 @@
           </p>
         </div> -->
       </div>
-      <canvas id="pickit" width="400" height="400"></canvas>
+      <div id="canvas-screen">
+        <canvas id="pickit" width="400" height="400"></canvas>
+      </div>
       <div id="score-screen" style="display:none">
         <h1>POOPS IN BIN: <span id="game-score">0</span></h1>
         <h1>WALKING TIME: <span id="game-timer">0</span></h1>
       </div>
       <div id="pause-screen"></div>
       <div id="winner-screen" style="display: none">
-        <h1>YOU WIN</h1>
+        <h1>YOU WON</h1>
         <button id="restart-button">PLAY AGAIN</button>
       </div>
       <div id="gameover-screen" style="display: none">
         Game Over
+        <button id="restart-button-2">PLAY AGAIN</button>
       </div>
     </div>
     <script src="js/map.js"></script>
