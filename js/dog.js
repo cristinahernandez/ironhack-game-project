@@ -1,11 +1,10 @@
 //Define Dog
 
 class Dog extends Character {
-  constructor(ctx) {
-    super(ctx);
-    this.x = 125;
-    this.y = 45;
-    this.pooping = this.generatePoo();
+  constructor(ctx, tileSize) {
+    super(ctx, tileSize);
+    this.x = this.tileSize * 3 + 5;
+    this.y = this.tileSize + 5;
     this.poosArray = [];
     this.dogImage = new Image();
     this.dogImage.src = "./assets/dog.png";
@@ -18,16 +17,11 @@ class Dog extends Character {
       this.dogImage,
       this.x,
       this.y,
-      this.charSize,
-      this.charSize
+      this.tileSize - 10,
+      this.tileSize - 10
     );
     // this.ctx.fillStyle = "#418FDE";
     // this.ctx.fillRect(this.x, this.y, this.charSize, this.charSize);
-  }
-
-  generatePoo() {
-    this.ctx.fillStyle = "#48403C";
-    this.ctx.fillRect(this.x, this.y, this.charSize, this.charSize);
   }
 
   // changeDirection(direction) {

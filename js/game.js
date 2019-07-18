@@ -14,10 +14,12 @@ class Game {
     this.neighbor = neighbor;
     this.neighborSpeed = 0;
     this.gameOver = undefined;
-    this.gameScore = 0;
+    this.gameScore = 20;
     this.firstPoo = false;
     this.timerSpeed = 0;
-    this.walkingTime = 20;
+    this.walkingTime = 60;
+    this.reputationScore = 3;
+    this.poosCounter = 0;
   }
 
   makePoo() {
@@ -58,7 +60,7 @@ class Game {
 
     //neighbor speed controller
     this.neighborSpeed++;
-    if (this.neighborSpeed === 10) {
+    if (this.neighborSpeed === 20) {
       this.moveRandom(this.neighbor);
       this.neighborSpeed = 0;
     }
@@ -70,15 +72,18 @@ class Game {
       if (!this.firstPoo) {
         // resto uno al contador de cacas
         this.makePoo();
+        this.poosCounter = this.poosCounter + 1;
         this.poopingSpeed = 0;
         this.firstPoo = true;
       }
     }
     if (this.poopingSpeed === 60) {
-      if (!this.checkPoos(this.poosArray, this.dog)) {
+      console.log(this.poosCounter);
+      if (!this.checkPoos(this.poosArray, this.dog) && this.poosCounter < 20) {
         // resto uno al contador de cacas
         // si el contador llega a 0, llamo a gameOver
         this.makePoo();
+        this.poosCounter++;
       }
       this.poopingSpeed = 0;
     }
@@ -97,7 +102,7 @@ class Game {
     this.neighborStepsPoo();
 
     //Win
-    if (this.gameScore === 10 && this.walkingTime <= 30) {
+    if (this.gameScore === 0 && this.walkingTime <= 60) {
       //Hide canvas Game and score screen
       document.getElementById("pickit").style = "display: none;";
       document.getElementById("score-screen").style = "display: none;";
@@ -110,7 +115,7 @@ class Game {
     }
 
     //GameOver
-    if (this.walkingTime === 0) {
+    if (this.walkingTime === 0 || this.reputationScore === 0) {
       //Hide canvas Game
       document.getElementById("pickit").style = "display: none;";
       //this.ctx.style = "display: none";
@@ -210,6 +215,8 @@ class Game {
             this.player.moveRight();
           }
           break;
+        case 80:
+          this.pause();
       }
     };
   }
@@ -222,7 +229,7 @@ class Game {
         this.poosArray[i].getPosition().y === this.player.getPosition().y
       ) {
         this.poosArray.splice(i, 1);
-        this.gameScore = this.gameScore + 1;
+        this.gameScore = this.gameScore - 1;
         console.log(this.gameScore);
         document.getElementById("game-score").innerHTML = this.gameScore;
       }
@@ -237,13 +244,19 @@ class Game {
         this.poosArray[i].getPosition().y === this.neighbor.getPosition().y
       ) {
         this.poosArray.splice(i, 1);
-        if (this.gameScore >= 4) {
-          this.gameScore = this.gameScore - 4;
-        } else {
-          this.gameScore = 0;
+        if (this.reputationScore > 0) {
+          this.reputationScore = this.reputationScore - 1;
         }
-        document.getElementById("game-score").innerHTML = this.gameScore;
-        console.log(this.gameScore);
+        // if (this.gameScore >= 4) {
+        // this.gameScore = this.gameScore - 4;
+        // } else {
+        // this.gameScore = 0;
+        // }
+        document.getElementById(
+          "reputation-counter"
+        ).innerHTML = this.reputationScore;
+        // document.getElementById("game-score").innerHTML = this.gameScore;
+        // console.log(this.gameScore);
       }
     }
   }
@@ -351,6 +364,8 @@ class Game {
     if (this.intervalGame) {
       window.cancelAnimationFrame(this.intervalGame);
       this.intervalGame = undefined;
+    } else {
+      this.start();
     }
   }
 

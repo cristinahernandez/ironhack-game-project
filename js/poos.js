@@ -1,10 +1,9 @@
 class Poo {
-  constructor(ctx, charSize, x, y, tileSize) {
+  constructor(ctx, tileSize, x, y) {
     this.ctx = ctx;
-    this.charSize = charSize;
+    this.tileSize = tileSize;
     this.x = x;
     this.y = y;
-    this.tileSize = tileSize;
     this.poopImage = new Image();
     this.poopImage.src = "./assets/poop.png";
   }
@@ -14,8 +13,8 @@ class Poo {
       this.poopImage,
       this.x,
       this.y,
-      this.charSize,
-      this.charSize
+      this.tileSize,
+      this.tileSize
     );
     // this.ctx.fillStyle = "#48403C";
     // this.ctx.fillRect(this.x + 10, this.y + 10, 10, 10);

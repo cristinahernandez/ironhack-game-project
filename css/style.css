@@ -41,6 +41,20 @@ body {
   text-align: center;
 }
 
+/*SCORE*/
+
+#score-screen {
+  flex-flow: row nowrap;
+  display: flex;
+  justify-content: space-between;
+}
+.score-item {
+}
+
+.m-right {
+  margin-right: 2em;
+}
+
 /* #splash-screen .game-intro,
 #splash-screen .game-warning {
   width: 60%;

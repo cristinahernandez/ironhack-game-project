@@ -5,13 +5,12 @@ class Character {
     this.ctx = ctx;
     this.tileSize = tileSize;
     this.map = map;
-    this.charSize = 30;
   }
 
   //get x and y of the Character
   getPosition() {
-    let newX = Math.floor(this.x / 40);
-    let newY = Math.floor(this.y / 40);
+    let newX = Math.floor(this.x / this.tileSize);
+    let newY = Math.floor(this.y / this.tileSize);
     return { x: newX, y: newY };
   }
 
