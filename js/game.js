@@ -69,7 +69,7 @@ class Game {
     //dog pooping
     this.poopingSpeed++;
 
-    if (this.poopingSpeed === 10) {
+    if (this.poopingSpeed === 15) {
       if (!this.firstPoo) {
         // resto uno al contador de cacas
         this.makePoo();
@@ -79,7 +79,7 @@ class Game {
         this.firstPoo = true;
       }
     }
-    if (this.poopingSpeed === 80) {
+    if (this.poopingSpeed === 60) {
       if (!this.checkPoos(this.poosArray, this.dog)) {
         // resto uno al contador de cacas
         // si el contador llega a 0, llamo a gameOver
@@ -253,13 +253,6 @@ class Game {
           this.reputation = this.reputation - 1;
           document.getElementById("reputation").innerHTML = this.reputation;
         }
-        // if (this.gameScore >= 4) {
-        // this.gameScore = this.gameScore - 4;
-        // } else {
-        // this.gameScore = 0;
-        // }
-        // document.getElementById("game-score").innerHTML = this.gameScore;
-        // console.log(this.gameScore);
       }
     }
   }
@@ -324,7 +317,23 @@ class Game {
 
   //check true is next position is map is walkable
   canImoveNextPosition(column, row) {
-    return this.map.map[row][column] === 1 ? true : false;
+    return this.map.map[row][column] === 1 ||
+      this.map.map[row][column] === 2 ||
+      this.map.map[row][column] === 4 ||
+      this.map.map[row][column] === 3 ||
+      this.map.map[row][column] === 5 ||
+      this.map.map[row][column] === 6 ||
+      this.map.map[row][column] === 7 ||
+      this.map.map[row][column] === 8 ||
+      this.map.map[row][column] === 9 ||
+      this.map.map[row][column] === 10 ||
+      this.map.map[row][column] === 11 ||
+      this.map.map[row][column] === 12 ||
+      this.map.map[row][column] === 13 ||
+      this.map.map[row][column] === 14 ||
+      this.map.map[row][column] === 15
+      ? true
+      : false;
   }
 
   //check character collision with map

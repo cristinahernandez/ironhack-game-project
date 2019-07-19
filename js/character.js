@@ -56,19 +56,19 @@ class Character {
 
   //directions
   moveUp() {
-    this.y -= 40;
+    this.y -= 64;
   }
 
   moveDown() {
-    this.y += 40;
+    this.y += 64;
   }
 
   moveLeft() {
-    this.x -= 40;
+    this.x -= 64;
   }
 
   moveRight() {
-    this.x += 40;
+    this.x += 64;
   }
 
   //moves randomly a character inside the map

@@ -21,8 +21,8 @@ class Poo {
   }
 
   getPosition() {
-    let newX = Math.floor(this.x / 40);
-    let newY = Math.floor(this.y / 40);
+    let newX = Math.floor(this.x / 64);
+    let newY = Math.floor(this.y / 64);
     return { x: newX, y: newY };
   }
 }

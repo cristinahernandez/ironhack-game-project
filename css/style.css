@@ -11,19 +11,26 @@ body {
   );
   background-size: 2.83px 2.83px;
 }
+
+h2 {
+  font-family: "Coiny", cursive;
+  color: #f5f2ec;
+}
+
 #game-container {
-  margin-top: 5%;
+  margin-top: 3%;
   width: 800px;
-  height: 530px;
+  min-height: 640px;
   margin-left: auto;
   margin-right: auto;
 }
 
-#splash-screen {
+#splash-screen,
+#gameover-screen {
   background: url("../assets/splash-screen.png") no-repeat top center;
   background-size: cover;
   padding-top: 5.5em;
-  min-height: 533px;
+  min-height: 640px;
 }
 
 #splash-screen .logo {
@@ -44,11 +51,11 @@ body {
 /*SCORE*/
 
 #score-screen {
+  width: 100%;
   flex-flow: row nowrap;
   display: flex;
   justify-content: space-between;
-}
-.score-item {
+  margin-bottom: 1em;
 }
 
 .m-right {
