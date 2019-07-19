@@ -3,7 +3,7 @@
 class Dog extends Character {
   constructor(ctx, tileSize) {
     super(ctx, tileSize);
-    this.x = this.tileSize * 3 + 5;
+    this.x = this.tileSize * 8 + 5;
     this.y = this.tileSize + 5;
     this.poosArray = [];
     this.dogImage = new Image();

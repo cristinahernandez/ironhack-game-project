@@ -14,12 +14,13 @@ class Game {
     this.neighbor = neighbor;
     this.neighborSpeed = 0;
     this.gameOver = undefined;
-    this.gameScore = 20;
+    this.poosToPick = 0;
+    this.poosToPickScore = 30;
+    this.poosCounter = 0;
     this.firstPoo = false;
     this.timerSpeed = 0;
-    this.walkingTime = 60;
-    this.reputationScore = 3;
-    this.poosCounter = 0;
+    this.walkingTime = 30;
+    this.reputation = 3;
   }
 
   makePoo() {
@@ -53,14 +54,14 @@ class Game {
 
     //dog speed controller
     this.dogSpeed++;
-    if (this.dogSpeed === 10) {
+    if (this.dogSpeed === 8) {
       this.moveRandom(this.dog);
       this.dogSpeed = 0;
     }
 
     //neighbor speed controller
     this.neighborSpeed++;
-    if (this.neighborSpeed === 20) {
+    if (this.neighborSpeed === 30) {
       this.moveRandom(this.neighbor);
       this.neighborSpeed = 0;
     }
@@ -68,22 +69,24 @@ class Game {
     //dog pooping
     this.poopingSpeed++;
 
-    if (this.poopingSpeed === 60) {
+    if (this.poopingSpeed === 10) {
       if (!this.firstPoo) {
         // resto uno al contador de cacas
         this.makePoo();
-        this.poosCounter = this.poosCounter + 1;
+        this.poosToPick = this.poosToPick + 1;
+        console.log(this.poosToPick);
         this.poopingSpeed = 0;
         this.firstPoo = true;
       }
     }
-    if (this.poopingSpeed === 60) {
-      console.log(this.poosCounter);
-      if (!this.checkPoos(this.poosArray, this.dog) && this.poosCounter < 20) {
+    if (this.poopingSpeed === 80) {
+      if (!this.checkPoos(this.poosArray, this.dog)) {
         // resto uno al contador de cacas
         // si el contador llega a 0, llamo a gameOver
         this.makePoo();
-        this.poosCounter++;
+        this.poosToPick = this.poosToPick + 1;
+        console.log(this.poosToPick);
+        console.log(this.poosArray.length);
       }
       this.poopingSpeed = 0;
     }
@@ -102,20 +105,22 @@ class Game {
     this.neighborStepsPoo();
 
     //Win
-    if (this.gameScore === 0 && this.walkingTime <= 60) {
-      //Hide canvas Game and score screen
-      document.getElementById("pickit").style = "display: none;";
-      document.getElementById("score-screen").style = "display: none;";
-      //Display Game Over screen
-      let winnerScreen = document.getElementById("winner-screen");
-      winnerScreen.style = "display: block";
+    if (this.firstPoo) {
+      if (this.poosArray.length === 0 && this.walkingTime <= 30) {
+        //Hide canvas Game and score screen
+        document.getElementById("pickit").style = "display: none;";
+        document.getElementById("score-screen").style = "display: none;";
+        //Display Game Over screen
+        let winnerScreen = document.getElementById("winner-screen");
+        winnerScreen.style = "display: block";
 
-      //Pause the loop Game
-      this.pause();
+        //Pause the loop Game
+        this.pause();
+      }
     }
 
     //GameOver
-    if (this.walkingTime === 0 || this.reputationScore === 0) {
+    if (this.walkingTime === 0 || this.reputation === 0) {
       //Hide canvas Game
       document.getElementById("pickit").style = "display: none;";
       //this.ctx.style = "display: none";
@@ -229,9 +234,9 @@ class Game {
         this.poosArray[i].getPosition().y === this.player.getPosition().y
       ) {
         this.poosArray.splice(i, 1);
-        this.gameScore = this.gameScore - 1;
-        console.log(this.gameScore);
-        document.getElementById("game-score").innerHTML = this.gameScore;
+        this.poosCounter = this.poosCounter + 1;
+        document.getElementById("poos-counter").innerHTML = this.poosCounter;
+        console.log(`You have picked up ${this.poosCounter} times`);
       }
     }
   }
@@ -244,17 +249,15 @@ class Game {
         this.poosArray[i].getPosition().y === this.neighbor.getPosition().y
       ) {
         this.poosArray.splice(i, 1);
-        if (this.reputationScore > 0) {
-          this.reputationScore = this.reputationScore - 1;
+        if (this.reputation > 0) {
+          this.reputation = this.reputation - 1;
+          document.getElementById("reputation").innerHTML = this.reputation;
         }
         // if (this.gameScore >= 4) {
         // this.gameScore = this.gameScore - 4;
         // } else {
         // this.gameScore = 0;
         // }
-        document.getElementById(
-          "reputation-counter"
-        ).innerHTML = this.reputationScore;
         // document.getElementById("game-score").innerHTML = this.gameScore;
         // console.log(this.gameScore);
       }
