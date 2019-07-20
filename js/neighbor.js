@@ -2,7 +2,7 @@ class Neighbor extends Character {
   constructor(ctx, tileSize) {
     super(ctx, tileSize);
     this.x = this.tileSize * 8 + 5;
-    this.y = this.tileSize * 5 + 5;
+    this.y = this.tileSize * 8 + 5;
     this.neighborImage = new Image();
     this.neighborImage.src = "./assets/grandma.png";
   }

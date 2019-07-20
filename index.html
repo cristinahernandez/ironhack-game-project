@@ -62,12 +62,18 @@
 
       <div id="pause-screen"></div>
       <div id="winner-screen" style="display: none">
-        <h1>YOU WON</h1>
-        <button id="restart-button">PLAY AGAIN</button>
+        <div class="winner-box">
+          <a href="#" id="restart-button-winner"
+            ><img src="assets/restart-button.png"
+          /></a>
+        </div>
       </div>
       <div id="gameover-screen" style="display: none">
-        Game Over
-        <button id="restart-button-2">PLAY AGAIN</button>
+        <div class="game-over-box">
+          <a href="#" id="restart-button-over"
+            ><img src="assets/restart-button.png"
+          /></a>
+        </div>
       </div>
     </div>
     <script src="js/map.js"></script>

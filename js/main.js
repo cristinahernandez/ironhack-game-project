@@ -47,8 +47,13 @@ document.onload = (function() {
   }
 
   //PLAY AGAIN
-  let restartButton = document.getElementById("restart-button-2");
-  restartButton.addEventListener("click", function() {
+  let restartButtonOver = document.getElementById("restart-button-over");
+  restartButtonOver.addEventListener("click", function() {
+    //Display Canvas Game
+    location.reload();
+  });
+  let restartButtonWinner = document.getElementById("restart-button-winner");
+  restartButtonWinner.addEventListener("click", function() {
     //Display Canvas Game
     location.reload();
   });

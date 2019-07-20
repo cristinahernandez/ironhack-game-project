@@ -61,7 +61,7 @@ class Game {
 
     //neighbor speed controller
     this.neighborSpeed++;
-    if (this.neighborSpeed === 30) {
+    if (this.neighborSpeed === 20) {
       this.moveRandom(this.neighbor);
       this.neighborSpeed = 0;
     }
@@ -69,7 +69,7 @@ class Game {
     //dog pooping
     this.poopingSpeed++;
 
-    if (this.poopingSpeed === 15) {
+    if (this.poopingSpeed === 10) {
       if (!this.firstPoo) {
         // resto uno al contador de cacas
         this.makePoo();
@@ -79,7 +79,7 @@ class Game {
         this.firstPoo = true;
       }
     }
-    if (this.poopingSpeed === 60) {
+    if (this.poopingSpeed === 40) {
       if (!this.checkPoos(this.poosArray, this.dog)) {
         // resto uno al contador de cacas
         // si el contador llega a 0, llamo a gameOver
@@ -128,7 +128,7 @@ class Game {
       //Display Game Over screen
       let gameOver = document.getElementById("gameover-screen");
       gameOver.style = "display: block";
-      // document.getElementById("winner-screen").style = "display: none;";
+      document.getElementById("winner-screen").style = "display: none;";
       document.getElementById("score-screen").style = "display: none;";
 
       //Pause the loop Game
